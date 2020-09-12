@@ -48,7 +48,7 @@ let run = async function (server: string, port: number, encoding: BufferEncoding
             }
             let datastr: string = data.toString(encoding);
             if (datastr != ldata) {
-                ws.send(data);
+                ws.send(datastr);
             }
             ldata = '';
         });
