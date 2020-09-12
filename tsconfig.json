@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "types": ["node"],
+    "outDir": "bin/"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
