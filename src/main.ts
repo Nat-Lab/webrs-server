@@ -36,7 +36,7 @@ let run = function (rsBin: string) {
             rsShell.write(data);
         });
 
-        ws.on('end', () => {
+        ws.on('close', () => {
             console.log(`${(new Date).toISOString()} disconnected: ${clientAddr}`);
             rsShell.kill();
         });
