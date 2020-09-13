@@ -24,8 +24,8 @@ let run = function (rsBin: string) {
         });
 
         ws.on('message', (data: string) => {
-            if (data[0] == '\0') { // control messages
-                let msg = data.substr(1);
+            if (data.length > 4 && data.substr(0, 4) == '\t\r\n\t') { // control messages
+                let msg = data.substr(4);
                 let [type, payload] = msg.split(';');
                 if (type == 'tremsz') {
                     let [rows, cols] = payload.split(',');
@@ -34,6 +34,7 @@ let run = function (rsBin: string) {
                     console.log(`${(new Date).toISOString()} ${clientAddr}: term size changed (rows: ${_rows}, cols: ${_cols})`);
                     rsShell.resize(_cols, _rows);
                 };
+                return;
             }
             rsShell.write(data);
         });
