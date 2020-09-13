@@ -11,19 +11,10 @@ let run = function (rsBin: string) {
         let clientAddr = req.socket.remoteAddress;
         console.log(`${(new Date).toISOString()} client connected: ${clientAddr}`);
 
-        let rows: number = 24;
-        if (req.url) {
-            let urlm = req.url.match(/\/([1-9]+[0-9]*)$/);
-            if (urlm) {
-                rows = Number.parseInt(urlm[1]);
-                console.log(`${(new Date).toISOString()} client ${clientAddr}: rows: ${rows}`);
-            }
-        }
-
         let rsShell = NodePty.spawn(rsBin, [], {
             name: 'xterm-color',
-            cols: 80, // bird don't actually care
-            rows: rows,
+            cols: 80,
+            rows: 24,
         });
 
         rsShell.onData(data => ws.send(data));
@@ -33,6 +24,17 @@ let run = function (rsBin: string) {
         });
 
         ws.on('message', (data: string) => {
+            if (data[0] == '\0') { // control messages
+                let msg = data.substr(1);
+                let [type, payload] = msg.split(';');
+                if (type == 'tremsz') {
+                    let [rows, cols] = payload.split(',');
+                    let _rows: number = Number.parseInt(rows);
+                    let _cols: number = Number.parseInt(cols);
+                    console.log(`${(new Date).toISOString()} ${clientAddr}: term size changed (rows: ${_rows}, cols: ${_cols})`);
+                    rsShell.resize(_cols, _rows);
+                };
+            }
             rsShell.write(data);
         });
 
