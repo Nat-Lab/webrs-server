@@ -7,7 +7,7 @@ let run = async function (rsBin: string) {
         host: "0.0.0.0"
     });
 
-    wss.on('connection', async function connection(ws: any) {
+    wss.on('connection', (ws) => {
         let rsShell = NodePty.spawn(rsBin, [], {
             name: 'xterm-color',
             cols: 80,
