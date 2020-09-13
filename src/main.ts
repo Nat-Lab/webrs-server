@@ -26,12 +26,13 @@ let run = function (rsBin: string) {
         ws.on('message', (data: string) => {
             if (data.length > 4 && data.substr(0, 4) == '\t\r\n\t') { // control messages
                 let msg = data.substr(4);
+                console.log(`${(new Date).toISOString()} ${clientAddr}: got control message: "${msg}"`);
                 let [type, payload] = msg.split(';');
-                if (type == 'tremsz') {
+                if (type == 'termsz') {
                     let [rows, cols] = payload.split(',');
                     let _rows: number = Number.parseInt(rows);
                     let _cols: number = Number.parseInt(cols);
-                    console.log(`${(new Date).toISOString()} ${clientAddr}: term size changed (rows: ${_rows}, cols: ${_cols})`);
+                    console.log(`${(new Date).toISOString()} ${clientAddr}: term size changed (${_cols}x${_rows})`);
                     rsShell.resize(_cols, _rows);
                 };
                 return;
