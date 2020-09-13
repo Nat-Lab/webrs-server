@@ -11,7 +11,7 @@ let run = function (rsBin: string) {
         let rows: number = 24;
         if (req.url) {
             let urlm = req.url.match(/\/([1-9]+[0-9]*)$/);
-            rows = Number.parseInt(urlm[1]);
+            if (urlm) rows = Number.parseInt(urlm[1]);
         }
 
         let rsShell = NodePty.spawn(rsBin, [], {
