@@ -1,7 +1,7 @@
 import * as NodePty from 'node-pty';
 import * as ws from 'ws';
 
-let run = async function (rsBin: string) {
+let run = function (rsBin: string) {
     let wss = new ws.Server({
         port: 8080,
         host: "0.0.0.0"
