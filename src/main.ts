@@ -5,13 +5,14 @@ const pkg: any = require('../package.json');
 let run = function (rsBin: string) {
     let wss = new ws.Server({
         port: 8080,
-        host: "0.0.0.0"
+        host: '0.0.0.0'
     });
 
     wss.on('connection', (ws, req) => {
         let clientAddr = req.socket.remoteAddress;
         console.log(`${(new Date).toISOString()} client connected: ${clientAddr}`);
-        ws.send(`\x1b[1;30mnato webrs server ${pkg.version} ready.\x1b[0m\r\n`);
+        ws.send(`\x1b[0;30mnato webrs server ${pkg.version} ready.\x1b[0m\r\n`);
+        ws.send(`\x1b[0;30mattaching to pty...\x1b[0m\r\n`);
 
         let rsShell = NodePty.spawn(rsBin, [], {
             name: 'xterm-color',
