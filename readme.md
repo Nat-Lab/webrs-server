@@ -22,7 +22,7 @@ See [`config.json`](./config.json) for example.
 
 ### Building
 
-You will need to have NodeJS ready before you can build the web app. 
+You will need to have NodeJS ready before you can build the server. 
 
 ```
 $ git clone https://github.com/nat-lab/webrs-server
@@ -42,4 +42,4 @@ sudo -u bird node bin/main.js config.json
 
 ### License
 
-`webrs-client` itself is distributed under UNLICENSE. Dependencies have their own licenses.
+`webrs-server` itself is distributed under UNLICENSE. Dependencies have their own licenses.
