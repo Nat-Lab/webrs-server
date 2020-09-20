@@ -22,7 +22,7 @@ See [`config.json`](./config.json) for example.
 
 ### Building
 
-You will need to have NodeJS ready before you can build the web app. 
+You will need to have NodeJS ready before you can build the server. 
 
 ```
 $ git clone https://github.com/nat-lab/webrs-server
