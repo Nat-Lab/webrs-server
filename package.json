@@ -1,6 +1,6 @@
 {
   "name": "webrs-server",
-  "version": "0.1",
+  "version": "0.1.1",
   "description": "webrs server",
   "main": "src/main.js",
   "scripts": {
